@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-include 'api/koneksi.php';
+include 'koneksi.php';
 if(!isset($_SESSION['username'])) { header("Location: login.php"); exit(); }
 ?>
 <?php
@@ -72,7 +72,7 @@ while($row = mysqli_fetch_assoc($get_local)) {
             <button id="toggle-dark" class="bg-white/10 p-2 border-2 border-white/20 rounded-xl text-[9px] font-black uppercase hover:bg-yellow-400 hover:text-kementan transition-all">
                 🌙 Mode Gelap
             </button>
-            <a href="api/logout.php" class="bg-red-500 border-2 border-[#1e3d1a] px-6 py-2 rounded-xl text-[10px] font-black uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">Keluar</a>
+            <a href="logout.php" class="bg-red-500 border-2 border-[#1e3d1a] px-6 py-2 rounded-xl text-[10px] font-black uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">Keluar</a>
         </div>
     </header>
 

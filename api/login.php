@@ -34,7 +34,7 @@
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Sistem Informasi Terintegrasi</p>
             </div>
 
-            <form action="api/prosesLogin.php" method="POST" class="space-y-5">
+            <form action="prosesLogin.php" method="POST" class="space-y-5">
                 <div>
                     <label class="text-[10px] font-black uppercase text-kementan ml-1">Username</label>
                     <input type="text" name="username" required class="w-full border-2 border-gray-100 bg-gray-50 p-4 rounded-xl font-bold outline-none focus:border-kementan focus:bg-white transition-all">

@@ -1,5 +1,5 @@
 <?php 
-session_start(); include '../api/koneksi.php';
+session_start(); include 'koneksi.php';
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
 ?>
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
                 <button id="toggle-dark" class="w-full p-2 border-2 border-[#00CC33] rounded-xl text-[10px] font-black uppercase transition-all">
                     🌙 Mode Gelap
                 </button>
-                <a href="../api/logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
+                <a href="logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
                     LOGOUT
                 </a>
             </div>
@@ -113,7 +113,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
                 <?php if (strtolower($_SESSION['username']) === 'imam'): ?>
                 <div class="bg-white neo-gov-card p-8 w-full mb-10">
                     <h4 class="font-black uppercase text-xs mb-6 italic border-b-2 border-emerald-100 pb-2 text-kementan">Otoritas Master: Tambah Admin Baru</h4>
-                    <form action="../api/tambah_admin.php" method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                    <form action="tambah_admin.php" method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                         <div>
                             <label class="text-[9px] font-black uppercase block mb-1 ml-1 text-[#1e3d1a]">Username Admin</label>
                             <input type="text" name="username" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold bg-white/50 outline-none">
@@ -149,7 +149,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
                                     Sesi Aktif
                                 </span>
                             <?php elseif (strtolower($_SESSION['username']) === 'Imam'): ?>
-                                <a href="../api/hapus_admin.php?id=<?php echo $row['id']; ?>" 
+                                <a href="hapus_admin.php?id=<?php echo $row['id']; ?>" 
                                 onclick="return confirm('Yakin ingin menghapus admin ini?')"
                                 class="bg-red-500 text-white border-2 border-[#1e3d1a] px-3 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">
                                 Hapus

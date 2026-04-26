@@ -1,5 +1,5 @@
 <?php 
-session_start(); include '../api/koneksi.php';
+session_start(); include 'koneksi.php';
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
 ?>
 <!DOCTYPE html>
@@ -90,7 +90,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
                 <button id="toggle-dark" class="w-full p-2 border-2 border-[#00CC33] rounded-xl text-[10px] font-black uppercase transition-all">
                     🌙 Mode Gelap
                 </button>
-                <a href="../api/logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
+                <a href="logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
                     LOGOUT
                 </a>
             </div>
@@ -103,7 +103,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
         
         <div class="bg-white neo-gov-card p-8 w-full mb-10">
             <h4 class="font-black uppercase text-xs mb-6 italic border-b-2 border-emerald-100 pb-2 text-kementan">Registrasi User Baru</h4>
-            <form action="../api/tambah_user.php" method="POST" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+            <form action="tambah_user.php" method="POST" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                 <div>
                     <label class="text-[9px] font-black uppercase block mb-1 ml-1 text-gray-400">Username</label>
                     <input type="text" name="username" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold focus:bg-emerald-50 outline-none text-sm">
@@ -145,7 +145,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
                         <td class="p-5 text-gray-400"><?php echo $row['email']; ?></td>
                         <td class="p-5 flex justify-center gap-3">
                             <a href="edit_user.php?id=<?php echo $row['id']; ?>" class="bg-yellow-400 border-2 border-[#1e3d1a] px-3 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">Edit</a>
-                            <a href="../api/hapus_user.php?id=<?php echo $row['id']; ?>" class="bg-red-500 text-white border-2 border-[#1e3d1a] px-3 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">Hapus</a>
+                            <a href="hapus_user.php?id=<?php echo $row['id']; ?>" class="bg-red-500 text-white border-2 border-[#1e3d1a] px-3 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">Hapus</a>
                         </td>
                     </tr>
                     <?php endwhile; ?>

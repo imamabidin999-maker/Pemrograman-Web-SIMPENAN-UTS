@@ -1,5 +1,5 @@
 <?php 
-session_start(); include '../api/koneksi.php';
+session_start(); include 'koneksi.php';
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
 
 $id = $_GET['id'];
@@ -24,7 +24,7 @@ $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM users WHERE id 
             <h1 class="text-3xl font-black italic uppercase tracking-tighter">Edit Data<span class="text-[#00CC33]">.</span></h1>
         </div>
         
-        <form action="../api/update_user.php" method="POST" class="space-y-6">
+        <form action="update_user.php" method="POST" class="space-y-6">
             <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
             
             <div>

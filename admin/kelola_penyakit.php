@@ -1,5 +1,5 @@
 <?php 
-session_start(); include '../api/koneksi.php';
+session_start(); include 'koneksi.php';
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
 ?>
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
                 <button id="toggle-dark" class="w-full p-2 border-2 border-[#00CC33] rounded-xl text-[10px] font-black uppercase transition-all">
                     🌙 Mode Gelap
                 </button>
-                <a href="../api/logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
+                <a href="logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
                     LOGOUT
                 </a>
             </div>
@@ -102,7 +102,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
 
         <div class="bg-white neo-gov-card p-8 w-full mb-10">
             <h4 class="font-black uppercase text-xs mb-6 italic border-b-2 border-emerald-100 pb-2">Tambah Data Baru</h4>
-                <form action="../api/tambah_penyakit.php" method="POST" enctype="multipart/form-data" class="space-y-4">
+                <form action="tambah_penyakit.php" method="POST" enctype="multipart/form-data" class="space-y-4">
                     <div>
                         <label class="text-[10px] font-black uppercase text-gray-400 block mb-1">Nama Penyakit</label>
                         <input type="text" name="nama_penyakit" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold outline-none text-sm">
@@ -151,7 +151,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
                         </td>
                         <td class="p-5"><?php echo $row['gejala_utama']; ?></td>
                         <td class="p-5 flex justify-center">
-                            <a href="../api/hapus_penyakit.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Hapus data ini?')" class="bg-red-500 text-white border-2 border-[#1e3d1a] px-4 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">Hapus</a>
+                            <a href="hapus_penyakit.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Hapus data ini?')" class="bg-red-500 text-white border-2 border-[#1e3d1a] px-4 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">Hapus</a>
                         </td>
                     </tr>
                     <?php endwhile; ?>

@@ -1,5 +1,5 @@
 <?php 
-session_start(); include '../api/koneksi.php';
+session_start(); include 'koneksi.php';
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
 ?>
 <!DOCTYPE html>

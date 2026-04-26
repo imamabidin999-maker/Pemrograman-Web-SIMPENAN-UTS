@@ -34,7 +34,7 @@
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em]">Daftar untuk akses sistem informasi</p>
             </div>
 
-            <form action="api/prosesRegister.php" method="POST" class="space-y-4">
+            <form action="prosesRegister.php" method="POST" class="space-y-4">
                 <div>
                     <label class="text-[10px] font-black uppercase text-kementan ml-1">Username</label>
                     <input type="text" name="username" required class="w-full border-2 border-gray-100 bg-gray-50 p-3 rounded-xl font-bold outline-none focus:border-kementan focus:bg-white transition-all italic uppercase">

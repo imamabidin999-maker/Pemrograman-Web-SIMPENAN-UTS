@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-include '../api/koneksi.php';
+include 'koneksi.php';
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
 
 $total_user = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users WHERE role = 'user'"));
@@ -89,7 +89,7 @@ $total_penyakit = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM penyakit
                 <button id="toggle-dark" class="w-full p-2 border-2 border-[#00CC33] rounded-xl text-[10px] font-black uppercase transition-all">
                     🌙 Mode Gelap
                 </button>
-                <a href="../api/logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
+                <a href="logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
                     LOGOUT
                 </a>
             </div>

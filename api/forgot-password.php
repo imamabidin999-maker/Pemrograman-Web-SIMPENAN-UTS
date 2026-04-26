@@ -36,7 +36,7 @@
             <h2 class="text-3xl font-black italic uppercase tracking-tighter text-kementan mb-2">Lupa Sandi?</h2>
             <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-8">Masukkan email terdaftar anda</p>
 
-            <form action="api/prosesReset.php" method="POST" class="space-y-6 text-left">
+            <form action="prosesReset.php" method="POST" class="space-y-6 text-left">
                 <div>
                     <label class="text-[10px] font-black uppercase text-kementan ml-1">Email Pemulihan</label>
                     <input type="email" name="email" required class="w-full border-2 border-gray-100 bg-gray-50 p-4 rounded-xl font-bold outline-none focus:border-kementan focus:bg-white transition-all">
