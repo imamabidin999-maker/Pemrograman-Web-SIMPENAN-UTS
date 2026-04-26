@@ -1,14 +1,17 @@
 <?php 
 session_start(); 
 include 'koneksi.php';
-if(!isset($_SESSION['username'])) { header("Location: login.php"); exit(); }
+if(!isset($_SESSION['username'])) { 
+    header("Location: login.php?error=session_lost"); 
+    exit(); 
+}
 ?>
 <?php
-// Ambil data lengkap dari database lokal
+
 $penyakit_lokal = [];
 $get_local = mysqli_query($koneksi, "SELECT * FROM penyakit");
 while($row = mysqli_fetch_assoc($get_local)) {
-    // Simpan semua detail dalam array asosiatif
+
     $penyakit_lokal[strtolower($row['nama_penyakit'])] = [
         'gejala' => $row['gejala_utama'],
         'ciri' => $row['ciri_ciri'],
