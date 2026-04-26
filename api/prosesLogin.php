@@ -14,12 +14,15 @@ if (isset($_POST['login'])) {
             $_SESSION['username'] = $user_data['username'];
             $_SESSION['role']     = $user_data['role'];
 
-            session_write_close();
+            // WAJIB: Pastikan sesi tersimpan sebelum redirect di Vercel
+            session_write_close(); 
 
             if ($user_data['role'] === 'admin') {
-                header("Location: ../admin/index.php"); 
+                // Gunakan path absolut sesuai rute vercel.json
+                header("Location: /admin/index.php"); 
             } else {
-                header("Location: dashboard.php"); 
+                // Gunakan /dashboard (bukan dashboard.php) agar sesuai rute Vercel
+                header("Location: /dashboard"); 
             }
             exit();
         }

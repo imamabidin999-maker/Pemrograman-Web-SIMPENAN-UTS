@@ -2,7 +2,8 @@
 session_start(); 
 include 'koneksi.php';
 if(!isset($_SESSION['username'])) { 
-    header("Location: login.php?error=session_lost"); 
+
+    header("Location: /login"); 
     exit(); 
 }
 ?>
