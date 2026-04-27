@@ -5,7 +5,7 @@ if (function_exists('session_start')) {
 
 include 'koneksi.php';
 
-if (isset($_SESSION['username'])) {
+if (isset($_COOKIE['username'])) {
     header("Location: /dashboard");
     exit();
 }

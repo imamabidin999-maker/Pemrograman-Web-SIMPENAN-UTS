@@ -2,7 +2,7 @@
 session_start(['cookie_path' => '/']); 
 include 'koneksi.php';
 
-if(!isset($_SESSION['username'])) { 
+if(!isset($_COOKIE['username'])) { 
     header("Location: /login"); 
     exit(); 
 }
