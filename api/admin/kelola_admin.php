@@ -1,6 +1,6 @@
 <?php 
 session_start(['cookie_path' => '/']);
-include '../koneksi.php';
+include __DIR__ . '/../koneksi.php';
 if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') { 
     header("Location: /login"); 
     exit(); 
