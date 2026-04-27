@@ -1,20 +1,20 @@
 <?php
-session_start(['cookie_path' => '/']);
-include 'koneksi.php';
+include __DIR__ . '/koneksi.php';
 
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../login.php");
+if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
+    header("Location: /login");
     exit();
 }
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+if(isset($_GET['id'])) {
+    $id = mysqli_real_escape_string($koneksi, $_GET['id']);
+    
+    mysqli_query($koneksi, "DELETE FROM users WHERE id = '$id'");
 
-    $query = "DELETE FROM users WHERE id = '$id' AND role = 'user'";
-    if (mysqli_query($koneksi, $query)) {
-        echo "<script>alert('User berhasil dihapus!'); window.location='../admin/kelola_user.php';</script>";
-    } else {
-        echo "Gagal menghapus: " . mysqli_error($koneksi);
-    }
+    header("Location: /admin/kelola_user.php");
+    exit();
+} else {
+    header("Location: /admin/kelola_user.php");
+    exit();
 }
 ?>

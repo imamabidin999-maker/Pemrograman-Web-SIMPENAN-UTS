@@ -10,13 +10,16 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Manajemen Admin - SIMPENAN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Admin - SIMPENAN</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; }
-        .sidebar { background-color: #1e3d1a; border-right: 5px solid #00CC33; }
-        .neo-gov-card { border: 3px solid #1e3d1a; border-radius: 1.5rem; box-shadow: 6px 6px 0px 0px rgba(30, 61, 26, 1); }
+        body { font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+        .bg-kementan { background-color: #2d5a27; }
+        .neo-gov-card { border: 3px solid #1e3d1a; border-radius: 2rem; box-shadow: 6px 6px 0px 0px rgba(30, 61, 26, 1); }
     
         .text-kementan { color: #1e3d1a; transition: all 0.3s; }
         .dark .text-kementan { color: #00CC33 !important; }

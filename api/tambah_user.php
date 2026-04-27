@@ -1,14 +1,24 @@
 <?php
-include 'koneksi.php';
+include __DIR__ . '/koneksi.php';
 
-$user = mysqli_real_escape_string($koneksi, $_POST['username']);
-$email = mysqli_real_escape_string($koneksi, $_POST['email']);
-$pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
+    header("Location: /login");
+    exit();
+}
 
-$query = "INSERT INTO users (username, email, password, role) VALUES ('$user', '$email', '$pass', 'user')";
-if(mysqli_query($koneksi, $query)) {
-    header("Location: ../admin/kelola_user.php?status=sukses");
-} else {
-    echo "Error: " . mysqli_error($koneksi);
+if(isset($_POST['username']) && isset($_POST['password'])) { 
+    $username = mysqli_real_escape_string($koneksi, $_POST['username']);
+    
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $role = 'user';
+
+    $query = "INSERT INTO users (username, password, role) VALUES ('$username', '$password', '$role')";
+    
+    if(mysqli_query($koneksi, $query)) {
+        header("Location: /admin/kelola_user.php");
+        exit();
+    } else {
+        echo "Error Database: " . mysqli_error($koneksi);
+    }
 }
 ?>
