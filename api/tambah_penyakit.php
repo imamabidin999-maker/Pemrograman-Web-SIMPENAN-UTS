@@ -6,14 +6,14 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
     exit();
 }
 
-if(isset($_POST['nama'])) {
-    $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
-    $deskripsi = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
-    
-    // Default gambar jika tidak upload
-    $gambar = "default.png"; 
+$nama_input = isset($_POST['nama_penyakit']) ? $_POST['nama_penyakit'] : (isset($_POST['nama']) ? $_POST['nama'] : '');
+$deskripsi_input = isset($_POST['deskripsi']) ? $_POST['deskripsi'] : '';
 
-    // Perbaikan: Gunakan kolom 'nama', bukan 'nama_penyakit'
+if(!empty($nama_input)) {
+    $nama = mysqli_real_escape_string($koneksi, $nama_input);
+    $deskripsi = mysqli_real_escape_string($koneksi, $deskripsi_input);
+    $gambar = "default.png";
+
     $query = "INSERT INTO penyakit (nama, deskripsi, gambar) VALUES ('$nama', '$deskripsi', '$gambar')";
     
     if(mysqli_query($koneksi, $query)) {
@@ -22,5 +22,10 @@ if(isset($_POST['nama'])) {
     } else {
         echo "Error Database: " . mysqli_error($koneksi);
     }
+} else {
+    echo "<script>
+        alert('Gagal: Kolom Nama Penyakit tidak boleh kosong!'); 
+        window.location='/admin/kelola_penyakit.php';
+    </script>";
 }
 ?>
