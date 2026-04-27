@@ -1,5 +1,6 @@
 <?php 
-session_start(); include 'koneksi.php';
+session_start(['cookie_path' => '/']); 
+include 'koneksi.php';
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
 
 $id = $_GET['id'];
