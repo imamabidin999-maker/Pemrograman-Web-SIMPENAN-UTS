@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(['cookie_path' => '/']);
 include 'koneksi.php';
 
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {

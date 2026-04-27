@@ -1,21 +1,21 @@
 <?php 
 session_start(['cookie_path' => '/']);
-include 'koneksi.php';
+include '../koneksi.php';
 if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Kelola Penyakit - SIMPENAN</title>
+    <title>Manajemen Admin - SIMPENAN</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: #f8fafc; }
         .sidebar { background-color: #1e3d1a; border-right: 5px solid #00CC33; }
         .neo-gov-card { border: 3px solid #1e3d1a; border-radius: 1.5rem; box-shadow: 6px 6px 0px 0px rgba(30, 61, 26, 1); }
-        
-        .text-kementan { color: #1e3d1a; }
+    
+        .text-kementan { color: #1e3d1a; transition: all 0.3s; }
         .dark .text-kementan { color: #00CC33 !important; }
 
         .dark body { background-color: #0f172a !important; color: #f8fafc !important; }
@@ -96,63 +96,68 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
         </aside>
 
     <main class="flex-1 p-12 flex flex-col items-start">
-        <div class="w-full flex justify-between items-center mb-10">
-            <h1 class="text-5xl font-black uppercase italic tracking-tighter text-[#1e3d1a]">Kelola Penyakit</h1>
-            <a href="cetak_penyakit.php" target="_blank" class="bg-[#00CC33] border-2 border-[#1e3d1a] px-6 py-2 rounded-xl font-black text-[10px] uppercase shadow-[4px_4px_0px_0px_rgba(30,61,26,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">🖨️ Cetak Laporan</a>
-        </div>
-
-        <div class="bg-white neo-gov-card p-8 w-full mb-10">
-            <h4 class="font-black uppercase text-xs mb-6 italic border-b-2 border-emerald-100 pb-2">Tambah Data Baru</h4>
-                <form action="tambah_penyakit.php" method="POST" enctype="multipart/form-data" class="space-y-4">
-                    <div>
-                        <label class="text-[10px] font-black uppercase text-gray-400 block mb-1">Nama Penyakit</label>
-                        <input type="text" name="nama_penyakit" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold outline-none text-sm">
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-black uppercase text-gray-400 block mb-1">Gejala Utama</label>
-                        <textarea name="gejala_utama" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold outline-none text-sm h-20"></textarea>
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-black uppercase text-gray-400 block mb-1">Ciri-Ciri Penyakit</label>
-                        <textarea name="ciri_ciri" class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold outline-none text-sm h-24"></textarea>
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-black uppercase text-gray-400 block mb-1">Cara Penanganan</label>
-                        <textarea name="penanganan" class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold outline-none text-sm h-24"></textarea>
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-black uppercase text-gray-400 block mb-1">Foto Penyakit (JPG/PNG)</label>
-                        <input type="file" name="foto" class="w-full border-2 border-dashed border-[#1e3d1a] p-3 rounded-xl font-bold text-xs bg-gray-50">
-                    </div>
-                    
-                    <button type="submit" class="w-full bg-[#1e3d1a] text-white py-4 rounded-xl font-black uppercase text-xs tracking-[0.2em] shadow-[4px_4px_0px_0px_#00CC33] hover:shadow-none transition-all mt-4">
-                        Simpan Data Penyakit
-                    </button>
-                </form>
-        </div>
-
-        <div class="bg-white neo-gov-card overflow-hidden w-full max-w-6xl">
+        <h1 class="text-5xl font-black uppercase italic tracking-tighter text-[#1e3d1a] mb-2">Manajemen Admin</h1>
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-10">Daftar Tim Pengelola Sistem</p>
+        
+        <div class="bg-white neo-gov-card overflow-hidden w-full max-w-5xl">
             <table class="w-full text-left">
                 <thead class="bg-[#1e3d1a] text-white uppercase text-[10px] font-black tracking-widest">
                     <tr>
-                        <th class="p-5">No</th>
-                        <th class="p-5">Nama Penyakit</th>
-                        <th class="p-5">Gejala Utama</th>
+                        <th class="p-5">ID</th>
+                        <th class="p-5">Username</th>
+                        <th class="p-5">Akses</th>
                         <th class="p-5 text-center">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="font-bold text-xs text-gray-600">
+                <tbody class="font-bold text-xs">
+
+                <?php if (strtolower($_SESSION['username']) === 'imam'): ?>
+                <div class="bg-white neo-gov-card p-8 w-full mb-10">
+                    <h4 class="font-black uppercase text-xs mb-6 italic border-b-2 border-emerald-100 pb-2 text-kementan">Otoritas Master: Tambah Admin Baru</h4>
+                    <form action="tambah_admin.php" method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div>
+                            <label class="text-[9px] font-black uppercase block mb-1 ml-1 text-[#1e3d1a]">Username Admin</label>
+                            <input type="text" name="username" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold bg-white/50 outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-black uppercase block mb-1 ml-1 text-[#1e3d1a]">Password Sementara</label>
+                            <input type="password" name="password" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold bg-white/50 outline-none">
+                        </div>
+                        <button type="submit" class="bg-black text-white px-8 py-3 rounded-xl border-2 border-[#1e3d1a] font-black uppercase text-[10px] shadow-[4px_4px_0px_0px_rgba(30,61,26,1)] hover:bg-[#00CC33] hover:text-[#1e3d1a] transition-all">
+                            Daftarkan Admin
+                        </button>
+                    </form>
+                </div>
+                <?php else: ?>
+
+                    <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-10 rounded-r-xl">
+                        <p class="text-[10px] font-black uppercase text-yellow-700 italic">Hanya Admin Master yang memiliki akses untuk menambah anggota tim baru.</p>
+                    </div>
+                <?php endif; ?>
                     <?php 
-                    $res = mysqli_query($koneksi, "SELECT * FROM penyakit ORDER BY id DESC");
-                    $no = 1; while($row = mysqli_fetch_assoc($res)): ?>
+
+                    $res = mysqli_query($koneksi, "SELECT * FROM users WHERE role = 'admin'");
+                    while($row = mysqli_fetch_assoc($res)): ?>
                     <tr class="border-b-2 border-gray-50 hover:bg-emerald-50 transition-colors">
-                        <td class="p-5 text-gray-300"><?php echo $no++; ?></td>
-                        <td class="p-6 italic uppercase text-kementan font-black">
-                            <?php echo $row['nama_penyakit']; ?>
+                        <td class="p-5 text-gray-300">#<?php echo $row['id']; ?></td>
+                        <td class="p-5 italic uppercase text-kementan font-black">
+                            <?php echo $row['username']; ?>
                         </td>
-                        <td class="p-5"><?php echo $row['gejala_utama']; ?></td>
-                        <td class="p-5 flex justify-center">
-                            <a href="hapus_penyakit.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Hapus data ini?')" class="bg-red-500 text-white border-2 border-[#1e3d1a] px-4 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">Hapus</a>
+                        <td class="p-5 text-yellow-500 uppercase tracking-tighter">Full Access</td>
+                        <td class="p-5 text-center">
+                            <?php if($row['username'] == $_SESSION['username']): ?>
+                                <span class="badge-sesi px-3 py-1 rounded-lg text-[8px] font-black uppercase bg-gray-100 text-gray-400">
+                                    Sesi Aktif
+                                </span>
+                            <?php elseif (strtolower($_SESSION['username']) === 'Imam'): ?>
+                                <a href="hapus_admin.php?id=<?php echo $row['id']; ?>" 
+                                onclick="return confirm('Yakin ingin menghapus admin ini?')"
+                                class="bg-red-500 text-white border-2 border-[#1e3d1a] px-3 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">
+                                Hapus
+                                </a>
+                            <?php else: ?>
+                                <span class="text-[8px] font-black uppercase opacity-30">No Access</span>
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <?php endwhile; ?>
