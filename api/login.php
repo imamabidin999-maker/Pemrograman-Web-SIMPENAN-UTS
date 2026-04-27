@@ -1,3 +1,16 @@
+<?php
+if (function_exists('session_start')) {
+    session_start(['cookie_path' => '/']);
+}
+
+include 'koneksi.php';
+
+if (isset($_SESSION['username'])) {
+    header("Location: /dashboard");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
