@@ -12,6 +12,10 @@ $ciri_ciri     = isset($_POST['ciri_ciri'])     ? mysqli_real_escape_string($kon
 $penanganan    = isset($_POST['penanganan'])    ? mysqli_real_escape_string($koneksi, $_POST['penanganan'])    : '';
 
 if (!empty($nama_penyakit)) {
+    $res_id  = mysqli_query($koneksi, "SELECT COALESCE(MAX(id), 0) + 1 AS next_id FROM penyakit");
+    $row_id  = mysqli_fetch_assoc($res_id);
+    $next_id = (int) $row_id['next_id'];
+
     $foto = "default.png";
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $ext  = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
@@ -24,8 +28,8 @@ if (!empty($nama_penyakit)) {
         }
     }
 
-    $query = "INSERT INTO penyakit (nama_penyakit, gejala_utama, ciri_ciri, penanganan, foto)
-              VALUES ('$nama_penyakit', '$gejala_utama', '$ciri_ciri', '$penanganan', '$foto')";
+    $query = "INSERT INTO penyakit (id, nama_penyakit, gejala_utama, ciri_ciri, penanganan, foto)
+              VALUES ('$next_id', '$nama_penyakit', '$gejala_utama', '$ciri_ciri', '$penanganan', '$foto')";
 
     if (mysqli_query($koneksi, $query)) {
         header("Location: /admin/kelola_penyakit.php");
