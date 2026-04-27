@@ -1,23 +1,16 @@
 <?php
-session_start(['cookie_path' => '/']);
-include 'koneksi.php';
+include __DIR__ . '/koneksi.php';
 
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../login.php");
+// Proteksi Cookie
+if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
+    header("Location: /login");
     exit();
 }
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-
-    $query = "DELETE FROM penyakit WHERE id = '$id'";
-    
-    if (mysqli_query($koneksi, $query)) {
-        echo "<script>alert('Data penyakit berhasil dihapus!'); window.location='../admin/kelola_penyakit.php';</script>";
-    } else {
-        echo "Gagal menghapus data: " . mysqli_error($koneksi);
-    }
-} else {
-    header("Location: ../admin/kelola_penyakit.php");
+if(isset($_GET['id'])) {
+    $id = mysqli_real_escape_string($koneksi, $_GET['id']);
+    mysqli_query($koneksi, "DELETE FROM penyakit WHERE id = '$id'");
 }
-?>
+
+header("Location: /admin/kelola_penyakit.php");
+exit();

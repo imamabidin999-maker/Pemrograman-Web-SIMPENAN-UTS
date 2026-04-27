@@ -1,33 +1,26 @@
 <?php
-include 'koneksi.php';
+include __DIR__ . '/koneksi.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama   = mysqli_real_escape_string($koneksi, $_POST['nama_penyakit']);
-    $gejala = mysqli_real_escape_string($koneksi, $_POST['gejala_utama']);
-    $ciri   = mysqli_real_escape_string($koneksi, $_POST['ciri_ciri']);
-    $obat   = mysqli_real_escape_string($koneksi, $_POST['penanganan']);
+if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
+    header("Location: /login");
+    exit();
+}
 
-    $foto_name = $_FILES['foto']['name'];
-    $foto_tmp  = $_FILES['foto']['tmp_name'];
+if(isset($_POST['nama'])) {
+    $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
+    $deskripsi = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
     
-    if(!empty($foto_name)){
-        $ekstensi = pathinfo($foto_name, PATHINFO_EXTENSION);
-        $new_name = "penyakit_" . time() . "." . $ekstensi;
-        $target   = "/assets/img/penyakit/" . $new_name;
-        
-        move_uploaded_file($foto_tmp, $target);
-        $foto_db = $new_name;
-    } else {
-        $foto_db = "";
-    }
+    // Default gambar jika tidak upload
+    $gambar = "default.png"; 
 
-    $query = "INSERT INTO penyakit (nama_penyakit, gejala_utama, ciri_ciri, penanganan, foto) 
-              VALUES ('$nama', '$gejala', '$ciri', '$obat', '$foto_db')";
-
-    if (mysqli_query($koneksi, $query)) {
-        header("Location: ../admin/kelola_penyakit.php?status=sukses");
+    // Perbaikan: Gunakan kolom 'nama', bukan 'nama_penyakit'
+    $query = "INSERT INTO penyakit (nama, deskripsi, gambar) VALUES ('$nama', '$deskripsi', '$gambar')";
+    
+    if(mysqli_query($koneksi, $query)) {
+        header("Location: /admin/kelola_penyakit.php");
+        exit();
     } else {
-        echo "Error: " . mysqli_error($koneksi);
+        echo "Error Database: " . mysqli_error($koneksi);
     }
 }
 ?>
