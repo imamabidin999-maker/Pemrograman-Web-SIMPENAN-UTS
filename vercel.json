@@ -6,12 +6,14 @@
   },
   "routes": [
     { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/admin", "dest": "/api/admin/index" },
-    { "src": "/admin/(.*\\.php)", "dest": "/api/admin/$1" },
-    { "src": "/login", "dest": "/api/login" },
-    { "src": "/register", "dest": "/api/register" },
-    { "src": "/dashboard", "dest": "/api/dashboard" },
+    { "src": "/admin", "dest": "/api/admin/index.php" },
+    { "src": "/admin/", "dest": "/api/admin/index.php" },
+    { "src": "/admin/(.*)", "dest": "/api/admin/$1" },
+    { "src": "/login", "dest": "/api/login.php" },
+    { "src": "/register", "dest": "/api/register.php" },
+    { "src": "/dashboard", "dest": "/api/dashboard.php" },
     { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/", "dest": "/api/index" }
+    { "src": "/(.*\\.php)", "dest": "/api/$1" },
+    { "src": "/", "dest": "/api/index.php" }
   ]
 }
