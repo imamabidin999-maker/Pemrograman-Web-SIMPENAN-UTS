@@ -1,4 +1,5 @@
 <?php 
+session_start(['cookie_path' => '/']);
 include __DIR__ . '/../koneksi.php';
 if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') { 
     header("Location: /login"); 
@@ -116,7 +117,7 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
                 </thead>
                 <tbody class="font-bold text-xs">
 
-                <?php if (isset($_COOKIE['username']) && strtolower($_COOKIE['username']) === 'imam'): ?>
+                <?php if (strtolower($_SESSION['username']) === 'imam'): ?>
                 <div class="bg-white neo-gov-card p-8 w-full mb-10">
                     <h4 class="font-black uppercase text-xs mb-6 italic border-b-2 border-emerald-100 pb-2 text-kementan">Otoritas Master: Tambah Admin Baru</h4>
                     <form action="/tambah_admin.php" method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
@@ -140,7 +141,8 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
                     </div>
                 <?php endif; ?>
                     <?php 
-                    $res = mysqli_query($koneksi, "SELECT * FROM admin");
+
+                    $res = mysqli_query($koneksi, "SELECT * FROM users WHERE role = 'admin'");
                     while($row = mysqli_fetch_assoc($res)): ?>
                     <tr class="border-b-2 border-gray-50 hover:bg-emerald-50 transition-colors">
                         <td class="p-5 text-gray-300">#<?php echo $row['id']; ?></td>
@@ -149,11 +151,11 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
                         </td>
                         <td class="p-5 text-yellow-500 uppercase tracking-tighter">Full Access</td>
                         <td class="p-5 text-center">
-                            <?php if(isset($_COOKIE['username']) && strtolower($row['username']) === strtolower($_COOKIE['username'])): ?>
+                            <?php if($row['username'] == $_SESSION['username']): ?>
                                 <span class="badge-sesi px-3 py-1 rounded-lg text-[8px] font-black uppercase bg-gray-100 text-gray-400">
                                     Sesi Aktif
                                 </span>
-                            <?php elseif (isset($_COOKIE['username']) && strtolower($_COOKIE['username']) === 'imam'): ?>
+                            <?php elseif (strtolower($_SESSION['username']) === 'Imam'): ?>
                                 <a href="/hapus_admin.php?id=<?php echo $row['id']; ?>" 
                                 onclick="return confirm('Yakin ingin menghapus admin ini?')"
                                 class="bg-red-500 text-white border-2 border-[#1e3d1a] px-3 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">
