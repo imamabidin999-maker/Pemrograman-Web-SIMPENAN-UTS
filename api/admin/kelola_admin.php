@@ -74,16 +74,16 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
             </div>
 
             <nav id="sidebar-nav" class="space-y-3 flex-grow text-[10px] font-black uppercase tracking-widest">
-                <a href="index.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
+                <a href="/admin/index.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
                     Dashboard
                 </a>
-                <a href="kelola_user.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
+                <a href="/admin/kelola_user.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
                     Kelola User
                 </a>
-                <a href="kelola_admin.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
+                <a href="/admin/kelola_admin.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
                     Kelola Admin
                 </a>
-                <a href="kelola_penyakit.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
+                <a href="/admin/kelola_penyakit.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
                     Kelola Penyakit
                 </a>
             </nav>
