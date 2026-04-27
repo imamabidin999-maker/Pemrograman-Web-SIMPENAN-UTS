@@ -1,7 +1,10 @@
 <?php 
 session_start(['cookie_path' => '/']);
 include '../koneksi.php';
-if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
+if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') { 
+    header("Location: /login"); 
+    exit(); 
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -64,7 +67,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
 <body class="flex min-h-screen">
         <aside class="w-72 sidebar text-white p-8 flex flex-col sticky top-0 h-screen shrink-0">
             <div class="flex flex-col items-center mb-10">
-                <img src="../assets/logo-simpenan.png" alt="Logo" class="w-20 h-auto mb-4 object-contain">
+                <img src="/assets/logo-simpenan.png" alt="Logo" class="w-20 h-auto mb-4 object-contain">
                 <h2 class="text-xl font-black italic uppercase text-center leading-none">
                     ADMIN<br><span class="text-[#00CC33]">PANEL.</span>
                 </h2>
@@ -89,7 +92,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
                 <button id="toggle-dark" class="w-full p-2 border-2 border-[#00CC33] rounded-xl text-[10px] font-black uppercase transition-all">
                     🌙 Mode Gelap
                 </button>
-                <a href="logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
+                <a href="/api/logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
                     LOGOUT
                 </a>
             </div>
@@ -166,6 +169,6 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
         </div>
     </main>
 
-    <script src="../assets/script.js"></script>
+    <script src="/assets/script.js"></script>
 </body>
 </html>

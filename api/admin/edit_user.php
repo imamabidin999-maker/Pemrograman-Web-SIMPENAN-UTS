@@ -1,8 +1,10 @@
 <?php 
 session_start(['cookie_path' => '/']); 
 include '../koneksi.php';
-if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
-
+if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') { 
+    header("Location: /login"); 
+    exit(); 
+}
 $id = $_GET['id'];
 $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM users WHERE id = '$id'"));
 ?>
@@ -21,7 +23,7 @@ $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM users WHERE id 
 <body class="min-h-screen flex items-center justify-center p-6">
     <div class="bg-white neo-gov-card p-12 w-full max-w-lg">
         <div class="flex items-center gap-4 mb-8">
-            <img src="../assets/logo-simpenan.png" alt="Logo" class="w-12 h-auto object-contain">
+            <img src="/assets/logo-simpenan.png" alt="Logo" class="w-12 h-auto object-contain">
             <h1 class="text-3xl font-black italic uppercase tracking-tighter">Edit Data<span class="text-[#00CC33]">.</span></h1>
         </div>
         
@@ -50,6 +52,6 @@ $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM users WHERE id 
         </form>
     </div>
 
-    <script src="../assets/script.js"></script>
+    <script src="/assets/script.js"></script>
 </body>
 </html>

@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(!empty($foto_name)){
         $ekstensi = pathinfo($foto_name, PATHINFO_EXTENSION);
         $new_name = "penyakit_" . time() . "." . $ekstensi;
-        $target   = "../assets/img/penyakit/" . $new_name;
+        $target   = "/assets/img/penyakit/" . $new_name;
         
         move_uploaded_file($foto_tmp, $target);
         $foto_db = $new_name;

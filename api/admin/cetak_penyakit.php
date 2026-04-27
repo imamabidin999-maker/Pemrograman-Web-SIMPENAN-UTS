@@ -1,7 +1,10 @@
 <?php 
 session_start(['cookie_path' => '/']); 
 include '../koneksi.php';
-if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
+if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') { 
+    header("Location: /login"); 
+    exit(); 
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -59,6 +62,6 @@ if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Locatio
         <button onclick="window.print()" class="bg-[#00CC33] border-4 border-black px-8 py-3 font-black uppercase text-xs shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">🖨️ Cetak PDF</button>
     </div>
 
-    <script src="../assets/script.js"></script>
+    <script src="/assets/script.js"></script>
 </body>
 </html>
