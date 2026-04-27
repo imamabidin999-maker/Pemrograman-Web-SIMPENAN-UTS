@@ -17,13 +17,13 @@ if (isset($_POST['login'])) {
             session_write_close(); 
 
             if ($user_data['role'] === 'admin') {
-                header("Location: /admin/index.php"); 
+                header("Location: /admin");
             } else {
-                header("Location: /dashboard"); 
+                header("Location: /dashboard");
             }
             exit();
         }
     }
-    echo "<script>alert('Username atau Password Salah!'); window.location='../login.php';</script>";
+    echo "<script>alert('Username atau Password Salah!'); window.location='/login';</script>";
 }
 ?>

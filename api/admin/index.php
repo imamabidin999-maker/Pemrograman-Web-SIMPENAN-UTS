@@ -1,7 +1,11 @@
 <?php 
 session_start(['cookie_path' => '/']); 
 include '../koneksi.php';
-if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { header("Location: ../login.php"); exit(); }
+
+if(!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { 
+    header("Location: /login"); 
+    exit();
+}
 
 $total_user = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users WHERE role = 'user'"));
 $total_penyakit = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM penyakit"));
