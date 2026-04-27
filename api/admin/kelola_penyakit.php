@@ -106,7 +106,7 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
 
         <div class="bg-white neo-gov-card p-8 w-full mb-10">
             <h4 class="font-black uppercase text-xs mb-6 italic border-b-2 border-emerald-100 pb-2">Tambah Data Baru</h4>
-                <form action="tambah_penyakit.php" method="POST" enctype="multipart/form-data" class="space-y-4">
+                <form action="/tambah_penyakit.php" method="POST" enctype="multipart/form-data" class="space-y-4">
                     <div>
                         <label class="text-[10px] font-black uppercase text-gray-400 block mb-1">Nama Penyakit</label>
                         <input type="text" name="nama_penyakit" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold outline-none text-sm">
@@ -155,7 +155,7 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
                         </td>
                         <td class="p-5"><?php echo $row['gejala_utama']; ?></td>
                         <td class="p-5 flex justify-center">
-                            <a href="hapus_penyakit.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Hapus data ini?')" class="bg-red-500 text-white border-2 border-[#1e3d1a] px-4 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">Hapus</a>
+                            <a href="/hapus_penyakit.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Hapus data ini?')" class="bg-red-500 text-white border-2 border-[#1e3d1a] px-4 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">Hapus</a>
                         </td>
                     </tr>
                     <?php endwhile; ?>

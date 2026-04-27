@@ -117,7 +117,7 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
                 <?php if (strtolower($_SESSION['username']) === 'imam'): ?>
                 <div class="bg-white neo-gov-card p-8 w-full mb-10">
                     <h4 class="font-black uppercase text-xs mb-6 italic border-b-2 border-emerald-100 pb-2 text-kementan">Otoritas Master: Tambah Admin Baru</h4>
-                    <form action="tambah_admin.php" method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                    <form action="/tambah_admin.php" method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                         <div>
                             <label class="text-[9px] font-black uppercase block mb-1 ml-1 text-[#1e3d1a]">Username Admin</label>
                             <input type="text" name="username" required class="w-full border-2 border-[#1e3d1a] p-3 rounded-xl font-bold bg-white/50 outline-none">
@@ -153,7 +153,7 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
                                     Sesi Aktif
                                 </span>
                             <?php elseif (strtolower($_SESSION['username']) === 'Imam'): ?>
-                                <a href="hapus_admin.php?id=<?php echo $row['id']; ?>" 
+                                <a href="/hapus_admin.php?id=<?php echo $row['id']; ?>" 
                                 onclick="return confirm('Yakin ingin menghapus admin ini?')"
                                 class="bg-red-500 text-white border-2 border-[#1e3d1a] px-3 py-1 rounded-lg text-[9px] font-black uppercase shadow-[2px_2px_0px_0px_rgba(30,61,26,1)] hover:shadow-none transition-all">
                                 Hapus
