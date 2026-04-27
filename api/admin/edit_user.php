@@ -5,8 +5,16 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
     header("Location: /login"); 
     exit(); 
 }
-$id = $_GET['id'];
+$id   = mysqli_real_escape_string($koneksi, $_GET['id'] ?? '');
+if (empty($id)) {
+    header("Location: /admin/kelola_user.php");
+    exit();
+}
 $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM users WHERE id = '$id'"));
+if (!$data) {
+    header("Location: /admin/kelola_user.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -27,17 +35,17 @@ $data = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM users WHERE id 
             <h1 class="text-3xl font-black italic uppercase tracking-tighter">Edit Data<span class="text-[#00CC33]">.</span></h1>
         </div>
         
-        <form action="update_user.php" method="POST" class="space-y-6">
-            <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+        <form action="/api/update_user.php" method="POST" class="space-y-6">
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($data['id']); ?>">
             
             <div>
                 <label class="text-[10px] font-black uppercase tracking-widest ml-1 text-gray-400">Username</label>
-                <input type="text" name="username" value="<?php echo $data['username']; ?>" required class="w-full border-2 border-[#1e3d1a] p-4 rounded-xl font-black uppercase italic outline-none focus:bg-emerald-50">
+                <input type="text" name="username" value="<?php echo htmlspecialchars($data['username']); ?>" required class="w-full border-2 border-[#1e3d1a] p-4 rounded-xl font-black uppercase italic outline-none focus:bg-emerald-50">
             </div>
 
             <div>
                 <label class="text-[10px] font-black uppercase tracking-widest ml-1 text-gray-400">Email Address</label>
-                <input type="email" name="email" value="<?php echo $data['email']; ?>" required class="w-full border-2 border-[#1e3d1a] p-4 rounded-xl font-bold outline-none focus:bg-emerald-50">
+                <input type="email" name="email" value="<?php echo htmlspecialchars($data['email']); ?>" required class="w-full border-2 border-[#1e3d1a] p-4 rounded-xl font-bold outline-none focus:bg-emerald-50">
             </div>
 
             <div>

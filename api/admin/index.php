@@ -7,7 +7,7 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
     exit(); 
 }
 
-$total_user = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users WHERE role = 'user'"));
+$total_user     = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM users WHERE role = 'user'"));
 $total_penyakit = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM penyakit"));
 ?>
 <!DOCTYPE html>
@@ -66,38 +66,38 @@ $total_penyakit = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM penyakit
     </style>
 </head>
 <body class="flex min-h-screen bg-[#f8fafc]">
-        <aside class="w-72 sidebar text-white p-8 flex flex-col sticky top-0 h-screen shrink-0">
-            <div class="flex flex-col items-center mb-10">
-                <img src="/assets/logo-simpenan.png" alt="Logo" class="w-20 h-auto mb-4 object-contain">
-                <h2 class="text-xl font-black italic uppercase text-center leading-none">
-                    ADMIN<br><span class="text-[#00CC33]">PANEL.</span>
-                </h2>
-            </div>
+    <aside class="w-72 sidebar text-white p-8 flex flex-col sticky top-0 h-screen shrink-0">
+        <div class="flex flex-col items-center mb-10">
+            <img src="/assets/logo-simpenan.png" alt="Logo" class="w-20 h-auto mb-4 object-contain">
+            <h2 class="text-xl font-black italic uppercase text-center leading-none">
+                ADMIN<br><span class="text-[#00CC33]">PANEL.</span>
+            </h2>
+        </div>
 
-            <nav id="sidebar-nav" class="space-y-3 flex-grow text-[10px] font-black uppercase tracking-widest">
-                <a href="/admin/index.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
-                    Dashboard
-                </a>
-                <a href="/admin/kelola_user.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
-                    Kelola User
-                </a>
-                <a href="/admin/kelola_penyakit.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
-                    Kelola Admin
-                </a>
-                <a href="/admin/kelola_admin.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
-                    Kelola Penyakit
-                </a>
-            </nav>
+        <nav id="sidebar-nav" class="space-y-3 flex-grow text-[10px] font-black uppercase tracking-widest">
+            <a href="/admin/index.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
+                Dashboard
+            </a>
+            <a href="/admin/kelola_user.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
+                Kelola User
+            </a>
+            <a href="/admin/kelola_admin.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
+                Kelola Admin
+            </a>
+            <a href="/admin/kelola_penyakit.php" class="flex items-center gap-3 p-3 rounded-xl border-2 border-[#1e3d1a] transition-all">
+                Kelola Penyakit
+            </a>
+        </nav>
 
-            <div class="space-y-4">
-                <button id="toggle-dark" class="w-full p-2 border-2 border-[#00CC33] rounded-xl text-[10px] font-black uppercase transition-all">
-                    🌙 Mode Gelap
-                </button>
-                <a href="/api/logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
-                    LOGOUT
-                </a>
-            </div>
-        </aside>
+        <div class="space-y-4">
+            <button id="toggle-dark" class="w-full p-2 border-2 border-[#00CC33] rounded-xl text-[10px] font-black uppercase transition-all">
+                🌙 Mode Gelap
+            </button>
+            <a href="/api/logout.php" class="block w-full bg-[#ff4d4d] border-[3px] border-[#1e3d1a] p-3 rounded-xl text-center font-black text-[10px] uppercase shadow-[3px_3px_0px_0px_rgba(30,61,26,1)]">
+                LOGOUT
+            </a>
+        </div>
+    </aside>
 
     <main class="flex-1 p-12 flex flex-col items-start">
         <header class="w-full flex justify-between items-center mb-12">

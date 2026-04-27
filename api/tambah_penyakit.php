@@ -6,15 +6,27 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
     exit();
 }
 
-$nama_form = isset($_POST['nama_penyakit']) ? $_POST['nama_penyakit'] : (isset($_POST['nama']) ? $_POST['nama'] : '');
-$deskripsi = isset($_POST['deskripsi']) ? mysqli_real_escape_string($koneksi, $_POST['deskripsi']) : '';
+$nama_penyakit = isset($_POST['nama_penyakit']) ? mysqli_real_escape_string($koneksi, $_POST['nama_penyakit']) : '';
+$gejala_utama  = isset($_POST['gejala_utama'])  ? mysqli_real_escape_string($koneksi, $_POST['gejala_utama'])  : '';
+$ciri_ciri     = isset($_POST['ciri_ciri'])     ? mysqli_real_escape_string($koneksi, $_POST['ciri_ciri'])     : '';
+$penanganan    = isset($_POST['penanganan'])    ? mysqli_real_escape_string($koneksi, $_POST['penanganan'])    : '';
 
-if (!empty($nama_form)) {
-    $nama = mysqli_real_escape_string($koneksi, $nama_form);
-    $gambar = "default.png"; 
+if (!empty($nama_penyakit)) {
+    $foto = "default.png";
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+        $ext  = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
+        $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+        if (in_array($ext, $allowed)) {
+            $foto = uniqid('penyakit_') . '.' . $ext;
+            $dest = __DIR__ . '/../assets/img/penyakit/' . $foto;
+            if (!is_dir(dirname($dest))) mkdir(dirname($dest), 0755, true);
+            move_uploaded_file($_FILES['foto']['tmp_name'], $dest);
+        }
+    }
 
-    $query = "INSERT INTO penyakit (nama, deskripsi, gambar) VALUES ('$nama', '$deskripsi', '$gambar')";
-    
+    $query = "INSERT INTO penyakit (nama_penyakit, gejala_utama, ciri_ciri, penanganan, foto)
+              VALUES ('$nama_penyakit', '$gejala_utama', '$ciri_ciri', '$penanganan', '$foto')";
+
     if (mysqli_query($koneksi, $query)) {
         header("Location: /admin/kelola_penyakit.php");
         exit();

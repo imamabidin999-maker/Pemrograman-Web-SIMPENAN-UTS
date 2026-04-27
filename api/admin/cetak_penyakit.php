@@ -5,6 +5,7 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
     header("Location: /login"); 
     exit(); 
 }
+$admin_name = $_COOKIE['username'] ?? 'Admin';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -25,7 +26,7 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
         <div class="text-center border-b-8 border-black pb-6 mb-10">
             <h1 class="text-6xl font-black italic tracking-tighter uppercase">SIMPENAN<span class="text-[#2d5a27]">.</span></h1>
             <p class="text-xs font-bold uppercase tracking-[0.3em] mt-2">Sistem Informasi Penyakit Tanaman Terpadu</p>
-            <p class="text-[10px] mt-4 opacity-60 uppercase">Dicetak pada: <?php echo date('d F Y, H:i'); ?> | Admin: <?php echo $_SESSION['username']; ?></p>
+            <p class="text-[10px] mt-4 opacity-60 uppercase">Dicetak pada: <?php echo date('d F Y, H:i'); ?> | Admin: <?php echo htmlspecialchars($admin_name); ?></p>
         </div>
 
         <h2 class="text-2xl font-black uppercase text-center mb-8 border-2 border-black py-2 bg-gray-50">Laporan Data Katalog Penyakit</h2>
@@ -44,8 +45,8 @@ if(!isset($_COOKIE['role']) || $_COOKIE['role'] !== 'admin') {
                 $no = 1; while($row = mysqli_fetch_assoc($res)): ?>
                 <tr>
                     <td class="border-4 border-black p-4"><?php echo $no++; ?></td>
-                    <td class="border-4 border-black p-4 text-[#2d5a27] italic"><?php echo $row['nama_penyakit']; ?></td>
-                    <td class="border-4 border-black p-4"><?php echo $row['gejala_utama']; ?></td>
+                    <td class="border-4 border-black p-4 text-[#2d5a27] italic"><?php echo htmlspecialchars($row['nama_penyakit']); ?></td>
+                    <td class="border-4 border-black p-4"><?php echo htmlspecialchars($row['gejala_utama']); ?></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
