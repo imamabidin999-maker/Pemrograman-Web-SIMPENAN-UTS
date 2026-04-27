@@ -64,7 +64,7 @@ while($row = mysqli_fetch_assoc($get_local)) {
 
     <header class="bg-kementan text-white py-5 px-10 border-b-[4px] border-yellow-400 flex justify-between items-center sticky top-0 z-50">
         <div class="flex items-center gap-4">
-            <img src="assets/logo-simpenan.png" alt="Logo" class="w-12 h-auto object-contain">
+            <img src="../assets/logo-simpenan.png" alt="Logo" class="w-12 h-auto object-contain">
             <h1 class="text-2xl font-black italic uppercase tracking-tighter">SIMPENAN<span class="text-yellow-400">.</span></h1>
         </div>
 
@@ -171,6 +171,6 @@ while($row = mysqli_fetch_assoc($get_local)) {
         const dataGejalaLokal = <?php echo json_encode($penyakit_lokal); ?>;
     </script>
 
-    <script src="assets/script.js"></script>
+    <script src="../assets/script.js"></script>
 </body>
 </html>
