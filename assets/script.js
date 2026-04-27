@@ -104,7 +104,7 @@ function showDetail(nama, ciri, penanganan, foto) {
 }
 
 function loadBpsData() {
-    fetch('api/ambil_data_bps.php')
+    fetch('/api/ambil_data_bps.php')
         .then(response => response.json())
         .then(res => {
             const body = document.getElementById('bps-data-body');
@@ -141,24 +141,21 @@ function closeModal() {
     modal.classList.remove('flex');
 }
 
-let allOptData = []; // Simpan data BPS di sini untuk filter
+let allOptData = [];
 
 function getOtomatisKategori(label) {
     const text = label.toLowerCase();
 
-    // Kata kunci untuk kelompok Hama (Hewan/Serangga)
     const keywordHama = ['ulat', 'tikus', 'wereng', 'belalang', 'lalat', 'uret', 'siput', 'thrips', 'burung', 'penggerek', 'ganjur', 'walang', 'kepinding'];
-    
-    // Kata kunci untuk kelompok Penyakit (Bakteri/Virus/Jamur)
+
     const keywordPenyakit = ['bercak', 'hawar', 'kerdil', 'noda', 'blas', 'tungro', 'jingga', 'b l s', 'b r s', 'pelepah', 'bakteri'];
 
-    // Logika Otomatis: Cek apakah label mengandung kata kunci di atas
     if (keywordHama.some(key => text.includes(key))) {
         return "Hama";
     } else if (keywordPenyakit.some(key => text.includes(key))) {
         return "Penyakit";
     } else {
-        return "Lainnya"; // Jika tidak ada yang cocok
+        return "Lainnya";
     }
 }
 
@@ -169,16 +166,14 @@ function renderTable(data) {
     data.forEach((item, index) => {
         const kategori = getOtomatisKategori(item.label);
         const labelLower = item.label.toLowerCase();
-        
-        // Ambil objek data lokal jika ada
+
         const local = dataGejalaLokal[labelLower] || null;
         
         const gejala = local ? local.gejala : '<span class="opacity-20 italic text-[10px]">Data Belum Teridentifikasi</span>';
-        const ciri = local ? local.ciri.replace(/'/g, "\\'") : ''; // Escape petik satu
+        const ciri = local ? local.ciri.replace(/'/g, "\\'") : '';
         const penanganan = local ? local.penanganan.replace(/'/g, "\\'") : '';
         const foto = local ? local.foto : '';
 
-        // Tambahkan onclick="showDetail(...)" pada tag <tr>
         let row = `<tr class="border-b-2 border-gray-50 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-slate-700 transition-all text-center cursor-pointer group" 
                     onclick="showDetail('${item.label}', '${ciri}', '${penanganan}', '${foto}')">
             <td class="p-5 text-gray-300 text-xs">#${index + 1}</td>
@@ -204,7 +199,7 @@ function renderTable(data) {
 }
 
 function loadMergedData() {
-    fetch('api/ambil_data_bps.php')
+    fetch('/api/ambil_data_bps.php')
         .then(r => r.json())
         .then(res => {
             const varId = "792", thId = "118", turThId = "0";
