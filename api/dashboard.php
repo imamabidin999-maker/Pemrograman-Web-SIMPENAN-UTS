@@ -115,18 +115,10 @@ while($row = mysqli_fetch_assoc($get_local)) {
     </main>
 
     <footer class="bg-[#1e3d1a] text-white py-16 px-10 border-t-[6px] border-yellow-400">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
             <div class="space-y-6">
                 <h1 class="text-3xl font-black italic uppercase tracking-tighter">SIMPENAN<span class="text-[#00CC33]">.</span></h1>
                 <p class="text-xs font-medium leading-relaxed opacity-60">Sistem Informasi Penyakit Tanaman Terpadu merupakan platform resmi digital untuk pemantauan kesehatan ekosistem pertanian Indonesia.</p>
-            </div>
-            <div class="space-y-6">
-                <h4 class="font-black uppercase text-xs tracking-[0.2em] text-yellow-400">Layanan User</h4>
-                <ul class="text-xs space-y-4 font-bold uppercase tracking-widest opacity-80">
-                    <li><a href="#" class="hover:text-[#00CC33] transition-colors">Panduan Penggunaan</a></li>
-                    <li><a href="#" class="hover:text-[#00CC33] transition-colors">Laporkan Masalah</a></li>
-                    <li><a href="#" class="hover:text-[#00CC33] transition-colors">Pusat Bantuan</a></li>
-                </ul>
             </div>
             <div class="space-y-6">
                 <h4 class="font-black uppercase text-xs tracking-[0.2em] text-yellow-400">Kantor Pusat</h4>
